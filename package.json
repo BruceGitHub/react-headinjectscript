@@ -1,0 +1,68 @@
+{
+  "name": "react-headinjectscript",
+  "version": "0.1.0",
+  "description": "A React component for inject script on head tag",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepublish": "npm run build",
+    "build": "babel ./src --out-dir ./dist --ignore __tests__",
+    "pretest": "eslint ./src",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BruceGitHub/react-headinjectscript"
+  },
+  "keywords": [
+    "Script",
+    "Inject",
+    "Head",
+    "react-component"
+  ],
+  "author": "Roberto Diana",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BruceGitHub/react-headinjectscript/issues"
+  },
+  "homepage": "https://github.com/BruceGitHub/react-headinjectscript",
+  "devDependencies": {
+    "babel": "^5.8.21",
+    "babel-eslint": "^4.0.5",
+    "babel-jest": "^5.3.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-react": "^6.16.0",
+    "babelify": "^5.0.4",
+    "browserify": "^8.1.3",
+    "chai": "^3.5.0",
+    "enzyme": "^2.5.1",
+    "eslint": "^1.1.0",
+    "eslint-plugin-react": "^3.2.1",
+    "express": "^4.11.2",
+    "jest": "^16.0.2",
+    "jest-cli": "^12.1.1",
+    "react": "^15.0.1",
+    "react-addons-test-utils": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-test-renderer": "^15.3.2",
+    "sinon": "^1.17.6"
+  },
+  "jest": {
+    "testPathDirs": [
+      "./src"
+    ],
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/react-addons-test-utils",
+      "<rootDir>/node_modules/fbjs",
+      "<rootDir>/node_modules/sinon",
+      "<rootDir>/node_modules/enzyme",
+      "<rootDir>/node_modules/chai"
+    ]
+  },
+  "peerDependencies": {
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1"
+  }
+}
