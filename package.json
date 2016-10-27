@@ -1,5 +1,5 @@
 {
-  "name": "react-comp-headinjectscript",
+  "name": "react-headinjectscript",
   "version": "0.1.0",
   "description": "a react component that inject src tag on head tag ",
   "main": "dist/index.js",
