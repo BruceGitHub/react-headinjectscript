@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "mocha -w src/lib/browser.js src/lib/*.test.js",
+    "prepublish": "npm run build",
     "build": "babel ./src --out-dir ./dist "
   },
   "repository": {
