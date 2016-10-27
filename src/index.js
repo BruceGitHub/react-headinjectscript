@@ -1,3 +1,3 @@
-import HeadInjectScript from './components/headinjectscript';
+import HeadInjectScript from './lib/headinjectscript';
 
-export {HeadInjectScript};
+module.exports = HeadInjectScript;
