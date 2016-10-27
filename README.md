@@ -2,6 +2,9 @@
 a component react that inject script tag on head tag
 
 # Usage 
+
+npm install react-headinjectscript
+
 ```javascript
 <HeadInjectScript 
     injectBeforeEvent={callback_before_event}
