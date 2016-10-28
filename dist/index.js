@@ -1,13 +1,9 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', {
-  value: true
-});
+var _headinjectscript = require('./lib/headinjectscript');
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+var _headinjectscript2 = _interopRequireDefault(_headinjectscript);
 
-var _componentsHeadinjectscript = require('./components/headinjectscript');
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _componentsHeadinjectscript2 = _interopRequireDefault(_componentsHeadinjectscript);
-
-exports.HeadInjectScript = _componentsHeadinjectscript2['default'];
+module.exports = _headinjectscript2.default;
