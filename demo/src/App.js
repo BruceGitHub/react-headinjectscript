@@ -30,7 +30,8 @@ class App extends Component {
   /*eslint no-undef: 0*/
   handleClick()
   {
-     this.setState({ src: 'https://maps.googleapis.com/maps/api/js' });
+     this.setState({ src: 'https://maps.googleapis.com/maps/api/js?callback=initMap' });
+     
   }
  
  
@@ -38,7 +39,7 @@ class App extends Component {
     return (
       <div className="App">  
         <HeadInjectScript
-          key={this.state.src} //tricks fix future release
+          key={this.state.src} //tricls fix future release
           injectBeforeEvent={this.callback_before_event}
           injectsource={this.callback_get_string_src}
           injectDoneEvent={this.callback_done_event}        
@@ -73,4 +74,3 @@ class App extends Component {
 }
 
 export default App;
-
