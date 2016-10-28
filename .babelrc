@@ -1,4 +1,8 @@
 {
   "presets":["stage-0","react","es2015"],
   "plugins": ["transform-class-properties"]
+  "ignore": [
+    "src/lib/browser.js",
+    "src/lib/*.test.js"
+  ]    
 }
