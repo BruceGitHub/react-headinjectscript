@@ -180,6 +180,8 @@ Run demo
 npm start
 ```
 
+![Alt Text](https://github.com/BruceGitHub/react-headinjectscript/blob/master/demo.gif)
+
 
 
 
