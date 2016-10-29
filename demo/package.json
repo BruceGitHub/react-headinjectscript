@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-comp-headinjectscript": "file:///Users/robertodiana/Desktop/progetti/react/react-comp-headinjectscript",
+    "react-headinjectscript": "react-headinjectscript",
     "react-scripts": "0.6.1"
   },
   "dependencies": {
