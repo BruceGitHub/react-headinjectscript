@@ -39,7 +39,11 @@ class App extends Component {
     return (
       <div className="App">  
         <HeadInjectScript
+<<<<<<< HEAD
           key={this.state.src} //tricks fix future release
+=======
+          key={this.state.src} //tricls fix future release
+>>>>>>> origin/master
           injectBeforeEvent={this.callback_before_event}
           injectsource={this.callback_get_string_src}
           injectDoneEvent={this.callback_done_event}        
