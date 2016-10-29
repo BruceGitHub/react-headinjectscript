@@ -1,6 +1,6 @@
 {
   "name": "react-headinjectscript",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "a react component that inject src tag on head tag ",
   "main": "dist/index.js",
   "scripts": {
