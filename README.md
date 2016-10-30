@@ -1,6 +1,8 @@
 # HeadInjectScript
 a component react that inject script tag on head tag
 
+[![Build Status](https://travis-ci.org/BruceGitHub/react-headinjectscript.svg?branch=master)](https://travis-ci.org/BruceGitHub/react-headinjectscript)
+
 # Usage 
 
 npm install react-headinjectscript
