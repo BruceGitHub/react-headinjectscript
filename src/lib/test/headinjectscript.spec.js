@@ -1,16 +1,16 @@
+
 import React from 'react';
 import { mount, shallow, render } from 'enzyme';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import jsdom from 'jsdom';
-// import jsdom from 'mocha-jsdom';
 
 
-import HeadInjectScript from './headinjectscript.jsx';
+import HeadInjectScript from './../headinjectscript';
 
 const srcTest = 'xxx';
 const srcArrayTest = [
-  'xxx',
+  'xxx', 
   'yyy',
 ];
 
@@ -133,4 +133,3 @@ describe('<HeadInjectScript/> ', () => {
     expect(documentRef.head.innerHTML).to.equal('<script src="test"></script><script src="xxx"></script><script src="yyy"></script>');
   });
 });
-
