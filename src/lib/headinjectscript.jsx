@@ -6,12 +6,15 @@ export default class HeadInjectScript extends React.Component {
   constructor(props) {
     super(props);
     this.checkValidSCript = false;
+    this.callOnLoadScriptEvent = this.callOnLoadScriptEvent.bind(this);
+    this.injectScriptSourceSingle = this.injectScriptSourceSingle.bind(this);
   }
 
   static propTypes = {
     injectBeforeEvent: React.PropTypes.func,
-    injectsource: React.PropTypes.func,
+    injectsource: React.PropTypes.func, 
     injectDoneEvent: React.PropTypes.func,
+    injectOnLoadScriptEvent: React.PropTypes.func,
   }
 
   /*
@@ -75,12 +78,22 @@ export default class HeadInjectScript extends React.Component {
   injectScriptSourceArray(paramSrcInput) {
       paramSrcInput.map(this.injectScriptSourceSingle);
   }
+
+  callOnLoadScriptEvent() {
+    // console.log('call injectOnLoadScriptEvent');
+    this.props.injectOnLoadScriptEvent();
+  }
   
   injectScriptSourceSingle(paramSrc) {
     if (paramSrc === '') return;
     if (paramSrc === undefined) return;
 
-    const script = document.createElement('script');
+    let script = document.createElement('script');
+
+    if (this.props.injectOnLoadScriptEvent) {
+     script.onload = this.callOnLoadScriptEvent; 
+    }
+
     script.setAttribute('src', paramSrc);
     document.head.appendChild(script);
 

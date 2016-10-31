@@ -1,10 +1,10 @@
 {
   "name": "react-headinjectscript",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "a react component that inject src tag on head tag ",
   "main": "dist/index.js",
   "scripts": {
-    "test": "mocha --compilers js:babel-register --require babel-polyfill src/lib/browser.js src/lib/test/*.spec.js",
+    "test": "mocha -w --watch-extensions jsx --compilers js:babel-register --require babel-polyfill src/lib/browser.js src/lib/test/*.spec.js",
     "prepublish": "npm run build",
     "build": "babel ./src --out-dir ./dist "
   },

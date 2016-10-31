@@ -13,6 +13,7 @@ const srcArrayTest = [
   'xxx', 
   'yyy',
 ];
+const srcMap = 'https://maps.googleapis.com/maps/api/js?callback=initMap';
 
 
 describe('<HeadInjectScript/> ', () => {
@@ -31,6 +32,7 @@ describe('<HeadInjectScript/> ', () => {
     sinon.spy(HeadInjectScript.prototype, 'componentWillMount');
     const wrapper = mount(<HeadInjectScript />);
     expect(HeadInjectScript.prototype.componentWillMount.calledOnce).to.equal(true);
+    HeadInjectScript.prototype.componentWillMount.restore(); // Unwraps the spy
   });
 
   it('calls componentDidMount', () => {
@@ -39,6 +41,8 @@ describe('<HeadInjectScript/> ', () => {
     const wrapper = mount(<HeadInjectScript injectsource={mockCallback} />);
 
     expect(HeadInjectScript.prototype.componentDidMount.calledOnce).to.equal(true);
+
+    HeadInjectScript.prototype.componentDidMount.restore(); // Unwraps the spy
   });
 
   it('if not defined injectsource props show error', () => {
@@ -87,7 +91,9 @@ describe('<HeadInjectScript/> ', () => {
     // console.log(document.innerHTML);
     // console.log(document.body.innerHTML);
 
-    expect(documentRef.head.innerHTML).to.equal('<script src="test"></script><script src="xxx"></script>');
+    const expectVal = '<script src="test"></script><script src="xxx"></script>';
+    const actualVal = documentRef.head.innerHTML;
+    expect(expectVal).to.equal(actualVal);
   });
 
   it('if injectsource return value script and src already inject not re-insert', () => {
@@ -96,7 +102,10 @@ describe('<HeadInjectScript/> ', () => {
     mount(<HeadInjectScript injectsource={mockCallback} />);
     mount(<HeadInjectScript injectsource={mockCallback} />);
 
-    expect(documentRef.head.innerHTML).to.equal('<script src="test"></script><script src="xxx"></script>');
+    const expectVal = '<script src="test"></script><script src="xxx"></script>';
+    const actualVal = documentRef.head.innerHTML;
+
+    expect(expectVal).to.equal(actualVal);
   });
 
   it('call injectBeforeEvent before injectscript', () => {
@@ -127,9 +136,25 @@ describe('<HeadInjectScript/> ', () => {
     const mockCallback = () => srcArrayTest;
 
     mount(<HeadInjectScript
-      injectsource={mockCallback}
+      injectsource={mockCallback} 
     />);
 
-    expect(documentRef.head.innerHTML).to.equal('<script src="test"></script><script src="xxx"></script><script src="yyy"></script>');
+    const expectVal = '<script src="test"></script><script src="xxx"></script><script src="yyy"></script>';
+    const actualVal = documentRef.head.innerHTML;
+
+    expect(expectVal).to.equal(actualVal);
   });
+
+  it('call callback when actually load script', done => {
+    const mockCallback = () => srcMap;
+    const mockCallbackInjectOnLoadEvent = sinon.spy();
+
+    const wrapper =  mount(<HeadInjectScript
+      injectsource={mockCallback}
+      injectOnLoadScriptEvent={done}
+    />);
+
+    // console.log('call callback when effective load script');
+  });
+
 });
