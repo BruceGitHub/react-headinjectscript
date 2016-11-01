@@ -9,9 +9,10 @@ npm install react-headinjectscript
 
 ```javascript
 <HeadInjectScript 
-    injectBeforeEvent={callback_before_event}
-    injectsource={callback_get_string_src}
-    injectDoneEvent{callback_done_event}
+    injectBeforeEvent={callback_before_event} //first event with no parameter
+    injectsource={callback_get_string_src} // when retrieve source script whith no parameter
+    injectDoneEvent={callback_done_event}  // when append to head tag no parameter
+    injectOnLoadScriptEvent={callback_load_event} // when load after injectDoneEvent whith url parameter
  />
 ```
 

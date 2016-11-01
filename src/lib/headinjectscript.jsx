@@ -79,19 +79,20 @@ export default class HeadInjectScript extends React.Component {
       paramSrcInput.map(this.injectScriptSourceSingle);
   }
 
-  callOnLoadScriptEvent() {
-    // console.log('call injectOnLoadScriptEvent');
-    this.props.injectOnLoadScriptEvent();
+  callOnLoadScriptEvent(paramUrl) {
+
+    // console.dir('call injectOnLoadScriptEvent:' + arguments[0]);
+    this.props.injectOnLoadScriptEvent(paramUrl);
   }
-  
-  injectScriptSourceSingle(paramSrc) {
+   
+  injectScriptSourceSingle(paramSrc) { 
     if (paramSrc === '') return;
     if (paramSrc === undefined) return;
 
     let script = document.createElement('script');
 
     if (this.props.injectOnLoadScriptEvent) {
-     script.onload = this.callOnLoadScriptEvent; 
+     script.onload = this.callOnLoadScriptEvent(paramSrc); 
     }
 
     script.setAttribute('src', paramSrc);

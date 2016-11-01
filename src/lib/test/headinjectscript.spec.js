@@ -145,16 +145,23 @@ describe('<HeadInjectScript/> ', () => {
     expect(expectVal).to.equal(actualVal);
   });
 
+  function call(paramUrl) {
+    console.log('call: ' + paramUrl);
+
+  }
   it('call callback when actually load script', done => {
     const mockCallback = () => srcMap;
-    const mockCallbackInjectOnLoadEvent = sinon.spy();
+
+    const asyncLoadScritptEvent = url =>  {
+      // console.log(url);
+      done();
+    }
 
     const wrapper =  mount(<HeadInjectScript
       injectsource={mockCallback}
-      injectOnLoadScriptEvent={done}
-    />);
+      injectOnLoadScriptEvent={asyncLoadScritptEvent}
+    />); 
 
-    // console.log('call callback when effective load script');
   });
 
-});
+}); 

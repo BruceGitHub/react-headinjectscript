@@ -24,6 +24,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var srcTest = 'xxx';
 var srcArrayTest = ['xxx', 'yyy'];
+var srcMap = 'https://maps.googleapis.com/maps/api/js?callback=initMap';
 
 describe('<HeadInjectScript/> ', function () {
   beforeEach(function () {
@@ -41,6 +42,7 @@ describe('<HeadInjectScript/> ', function () {
     _sinon2.default.spy(_headinjectscript2.default.prototype, 'componentWillMount');
     var wrapper = (0, _enzyme.mount)(_react2.default.createElement(_headinjectscript2.default, null));
     (0, _chai.expect)(_headinjectscript2.default.prototype.componentWillMount.calledOnce).to.equal(true);
+    _headinjectscript2.default.prototype.componentWillMount.restore(); // Unwraps the spy
   });
 
   it('calls componentDidMount', function () {
@@ -51,6 +53,8 @@ describe('<HeadInjectScript/> ', function () {
     var wrapper = (0, _enzyme.mount)(_react2.default.createElement(_headinjectscript2.default, { injectsource: mockCallback }));
 
     (0, _chai.expect)(_headinjectscript2.default.prototype.componentDidMount.calledOnce).to.equal(true);
+
+    _headinjectscript2.default.prototype.componentDidMount.restore(); // Unwraps the spy
   });
 
   it('if not defined injectsource props show error', function () {
@@ -111,7 +115,9 @@ describe('<HeadInjectScript/> ', function () {
     // console.log(document.innerHTML);
     // console.log(document.body.innerHTML);
 
-    (0, _chai.expect)(documentRef.head.innerHTML).to.equal('<script src="test"></script><script src="xxx"></script>');
+    var expectVal = '<script src="test"></script><script src="xxx"></script>';
+    var actualVal = documentRef.head.innerHTML;
+    (0, _chai.expect)(expectVal).to.equal(actualVal);
   });
 
   it('if injectsource return value script and src already inject not re-insert', function () {
@@ -122,7 +128,10 @@ describe('<HeadInjectScript/> ', function () {
     (0, _enzyme.mount)(_react2.default.createElement(_headinjectscript2.default, { injectsource: mockCallback }));
     (0, _enzyme.mount)(_react2.default.createElement(_headinjectscript2.default, { injectsource: mockCallback }));
 
-    (0, _chai.expect)(documentRef.head.innerHTML).to.equal('<script src="test"></script><script src="xxx"></script>');
+    var expectVal = '<script src="test"></script><script src="xxx"></script>';
+    var actualVal = documentRef.head.innerHTML;
+
+    (0, _chai.expect)(expectVal).to.equal(actualVal);
   });
 
   it('call injectBeforeEvent before injectscript', function () {
@@ -162,6 +171,28 @@ describe('<HeadInjectScript/> ', function () {
       injectsource: mockCallback
     }));
 
-    (0, _chai.expect)(documentRef.head.innerHTML).to.equal('<script src="test"></script><script src="xxx"></script><script src="yyy"></script>');
+    var expectVal = '<script src="test"></script><script src="xxx"></script><script src="yyy"></script>';
+    var actualVal = documentRef.head.innerHTML;
+
+    (0, _chai.expect)(expectVal).to.equal(actualVal);
+  });
+
+  function call(paramUrl) {
+    console.log('call: ' + paramUrl);
+  }
+  it('call callback when actually load script', function (done) {
+    var mockCallback = function mockCallback() {
+      return srcMap;
+    };
+
+    var asyncLoadScritptEvent = function asyncLoadScritptEvent(url) {
+      // console.log(url);
+      done();
+    };
+
+    var wrapper = (0, _enzyme.mount)(_react2.default.createElement(_headinjectscript2.default, {
+      injectsource: mockCallback,
+      injectOnLoadScriptEvent: asyncLoadScritptEvent
+    }));
   });
 });

@@ -27,6 +27,8 @@ var HeadInjectScript = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (HeadInjectScript.__proto__ || Object.getPrototypeOf(HeadInjectScript)).call(this, props));
 
     _this.checkValidSCript = false;
+    _this.callOnLoadScriptEvent = _this.callOnLoadScriptEvent.bind(_this);
+    _this.injectScriptSourceSingle = _this.injectScriptSourceSingle.bind(_this);
     return _this;
   }
 
@@ -98,12 +100,24 @@ var HeadInjectScript = function (_React$Component) {
       paramSrcInput.map(this.injectScriptSourceSingle);
     }
   }, {
+    key: 'callOnLoadScriptEvent',
+    value: function callOnLoadScriptEvent(paramUrl) {
+
+      // console.dir('call injectOnLoadScriptEvent:' + arguments[0]);
+      this.props.injectOnLoadScriptEvent(paramUrl);
+    }
+  }, {
     key: 'injectScriptSourceSingle',
     value: function injectScriptSourceSingle(paramSrc) {
       if (paramSrc === '') return;
       if (paramSrc === undefined) return;
 
       var script = document.createElement('script');
+
+      if (this.props.injectOnLoadScriptEvent) {
+        script.onload = this.callOnLoadScriptEvent(paramSrc);
+      }
+
       script.setAttribute('src', paramSrc);
       document.head.appendChild(script);
 
@@ -145,6 +159,7 @@ var HeadInjectScript = function (_React$Component) {
 HeadInjectScript.propTypes = {
   injectBeforeEvent: _react2.default.PropTypes.func,
   injectsource: _react2.default.PropTypes.func,
-  injectDoneEvent: _react2.default.PropTypes.func
+  injectDoneEvent: _react2.default.PropTypes.func,
+  injectOnLoadScriptEvent: _react2.default.PropTypes.func
 };
 exports.default = HeadInjectScript;
